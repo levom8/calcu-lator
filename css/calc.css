@@ -1,0 +1,55 @@
+* {
+    border: 1px black dotted;    
+}
+
+button {
+    width: 4em;
+    height: 4em;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    width: 15em;
+    height: 20em;
+
+}
+
+.display {
+    flex:1 0 1;
+    height: 2em;
+    align-self:flex-end; 
+    box-sizing: border-box;
+
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    flex:1;
+}
+
+.zero {
+    width:61.5%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.numbers {
+    flex:1;
+    flex-wrap: wrap;
+}
+
+.operators {
+    flex: 1;
+}
