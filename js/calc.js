@@ -6,7 +6,7 @@ function operate(a,b, operator) {
     } else if (operator === "*") {
         return a * b;
     } else if (operator === "/") {
-        if(y === 0) {
+        if(b === 0) {
             return 'lmao';
         } else {
         return a / b;
@@ -36,7 +36,7 @@ function updateScreen() {
     }
 }
 
-// updateScreen();
+updateScreen();
 
 function clickButton() {
     for(let i = 0; i < buttons.length; i++) {
@@ -50,7 +50,7 @@ function clickButton() {
                 inputEquals();
                 updateScreen();
             } else if(buttons[i].classList.contains('clear')) {
-                clearBtn();
+                clearScreen();
                 updateScreen();
             } else {
                 console.log("yoyoyo");
@@ -109,10 +109,40 @@ function inputOperator(operator) {
 }
 
 function inputEquals() {
-    secondOperand = displayValue;
-    result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
-    displayValue = roundAccurately(result,15).toString();
-    firstOperand = displayValue;
+    if(secondOperator != null) {
+        //handles final result
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
+        if(result === 'lmao') {
+            displayValue = 'lmao';
+        } else {
+            displayValue = roundAccurately(result,15).toString();
+            firstOperand = displayValue;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    } else {
+        //handles first operation
+        secondOperand = displayValue;
+        result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
+        if(result === 'lmao') {
+            displayValue = 'lmao';
+        } else {
+            displayValue = roundAccurately(result, 15).toString();
+            firstOperand = displayValue;
+            secondOperand = null;
+            firstOperator = null;
+            secondOperator = null;
+            result = null;
+        }
+    }   
+}
+
+function clearScreen() {
+    displayValue = '0';
+    firstOperand = null;
     secondOperand = null;
     firstOperator = null;
     secondOperator = null;
@@ -181,10 +211,10 @@ function roundAccurately(num, places) {
     return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
 }
 
-const clearBtn = document.querySelector('.clear');
-clearBtn.addEventListener('click', () => {
-    screen.textContent = '';
-    x = [];
-    results = 0;
-    });
+// const clearBtn = document.querySelector('.clear');
+// clearBtn.addEventListener('click', () => {
+//     screen.textContent = '';
+//     x = [];
+//     results = 0;
+//     });
 
